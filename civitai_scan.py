@@ -11,7 +11,7 @@ base_url = "https://civitai.com/api/v1/models"
 params = {
     "username": username,
 }
-url = f"{base_url}?{urllib.parse.urlencode(params)}"
+url = f"{base_url}?{urllib.parse.urlencode(params)}&nsfw=true"
 
 # Set the headers
 headers = {
@@ -23,18 +23,14 @@ def get_json_response(url):
     response = requests.get(url, headers=headers)
     return response.json()
 
-# Function to check for totalItems and totalPages in JSON response metadata
+# Function to check for totalItems in JSON response metadata
 def check_response_metadata(data):
     metadata = data.get('metadata')
 
     if metadata:
         total_items = metadata.get('totalItems')
-        total_pages = metadata.get('totalPages')
-
         if total_items:
             print("Total Items:", total_items)
-        if total_pages:
-            print("Total Pages:", total_pages)
 
 # Function to extract data from the JSON response
 def extract_data(data):
@@ -92,12 +88,15 @@ check_response_metadata(data)
 # Extract data from the initial JSON response
 download_urls = extract_data(data)
 
-# Iterate through subsequent pages until the last page is reached
-metadata = data.get('metadata')
-total_pages = metadata.get('totalPages', 0)
+# Initialize progress bar
+pbar = tqdm(desc="Processing Pages", unit="page")
 
-for page in tqdm(range(2, total_pages + 1), desc="Processing Pages"):
+# Iterate through subsequent pages until there are no more pages
+while True:
+    pbar.update(1)
+    metadata = data.get('metadata', {})
     next_page_url = metadata.get('nextPage')
+    
     if not next_page_url:
         break
 
@@ -106,6 +105,8 @@ for page in tqdm(range(2, total_pages + 1), desc="Processing Pages"):
 
     # Extract data from the JSON response
     download_urls += extract_data(data)
+
+pbar.close()
 
 # Write the data to a CSV file
 output_filename = f"{username}_output.csv"
