@@ -45,6 +45,7 @@ def extract_data(data):
         model_versions = item.get('modelVersions', [])
         for version in model_versions:
             model_version_id = version.get('id')
+            model_version_name = version.get('name')
             base_model = version.get('baseModel')
             files = version.get('files', [])
             images = version.get('images', [])
@@ -62,6 +63,7 @@ def extract_data(data):
 
                 download_url_data = {
                     "Item Name": item_name,
+                    "Model Version Name": model_version_name,
                     "Item Type": item_type,
                     "Base Model": base_model,
                     "File Name": file_name,
@@ -76,7 +78,7 @@ def extract_data(data):
 
 # Function to write the data to a CSV file
 def write_to_csv(data, filename):
-    fieldnames = ["Item Name", "Item Type", "Base Model", "File Name", "Download URL", "Model Image", "Model Version URL"]
+    fieldnames = ["Item Name", "Model Version Name", "Item Type", "Base Model", "File Name", "Download URL", "Model Image", "Model Version URL"]
 
     with open(filename, mode="w", newline="") as file:
         writer = csv.DictWriter(file, fieldnames=fieldnames)

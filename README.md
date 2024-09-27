@@ -9,6 +9,10 @@ Item Name
 ```
 Shimakaze (kancolle) - Character
 ```
+Model Version Name
+```
+v1.0, v2.0, etc...
+```
 Item Type
 ```
 LORA
