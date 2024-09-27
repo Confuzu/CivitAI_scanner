@@ -43,7 +43,7 @@ def extract_data(data):
 
         model_versions = item.get('modelVersions', [])
         for version in model_versions:
-            model_id = version.get('modelId')
+            model_id = version.get('id')
             files = version.get('files', [])
             images = version.get('images', [])
 
