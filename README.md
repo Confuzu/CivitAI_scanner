@@ -9,10 +9,17 @@ Item Name
 ```
 Shimakaze (kancolle) - Character
 ```
-
+Model Version Name
+```
+v1.0, v2.0, etc...
+```
 Item Type
 ```
 LORA
+```
+Base Model
+```
+SD15, Pony, Flux, etc...
 ```
 File Name
 ```
@@ -26,7 +33,7 @@ Model Image
 ```
 https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/f691d97f-fac1-490f-1f4c-fc5de9132c00/width=450/557426.jpeg
 ```
-Model URL
+Model Version URL
 ```
-https://civitai.com/models/13157
+https://civitai.com/models/13157?modelVersionId=40743
 ```
