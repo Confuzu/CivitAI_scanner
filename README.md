@@ -18,6 +18,10 @@ File Name
 ```
 shimakaze_v1.33.safetensors
 ```
+Base Model
+```
+SD15, Pony, Flux, etc...
+```
 Download URL
 ```
 https://civitai.com/api/download/models/40743
