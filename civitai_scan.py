@@ -62,6 +62,7 @@ def extract_data(data):
                 model_version_url = f"https://civitai.com/models/{item_id}?modelVersionId={model_version_id}"
 
                 download_url_data = {
+                    "Author": username,
                     "Item Name": item_name,
                     "Model Version Name": model_version_name,
                     "Item Type": item_type,
@@ -78,7 +79,7 @@ def extract_data(data):
 
 # Function to write the data to a CSV file
 def write_to_csv(data, filename):
-    fieldnames = ["Item Name", "Model Version Name", "Item Type", "Base Model", "File Name", "Download URL", "Model Image", "Model Version URL"]
+    fieldnames = ["Author", "Item Name", "Model Version Name", "Item Type", "Base Model", "File Name", "Download URL", "Model Image", "Model Version URL"]
 
     with open(filename, mode="w", newline="") as file:
         writer = csv.DictWriter(file, fieldnames=fieldnames)
