@@ -3,6 +3,8 @@ import urllib.parse
 import csv
 from tqdm import tqdm
 
+type_base_statistics = {}
+
 # Prompt user for username
 username = input("Enter your username: ")
 
@@ -50,6 +52,15 @@ def extract_data(data):
             files = version.get('files', [])
             images = version.get('images', [])
 
+            # Create Item Type and Base Model Statistics
+            type_base = item_type + "-" + base_model
+            if type_base in type_base_statistics:
+                # If the "type_base"  is already in the dictionary, increment its count
+                type_base_statistics[type_base] += 1
+            else:
+                # If the "type_base" is not in the dictionary, add it with a count of 1
+                type_base_statistics[type_base] = 1
+
             for file in files:
                 file_name = file.get('name', '')
                 file_download_url = file.get('downloadUrl', '')
@@ -62,6 +73,7 @@ def extract_data(data):
                 model_version_url = f"https://civitai.com/models/{item_id}?modelVersionId={model_version_id}"
 
                 download_url_data = {
+                    "Author": username,
                     "Item Name": item_name,
                     "Model Version Name": model_version_name,
                     "Item Type": item_type,
@@ -78,7 +90,7 @@ def extract_data(data):
 
 # Function to write the data to a CSV file
 def write_to_csv(data, filename):
-    fieldnames = ["Item Name", "Model Version Name", "Item Type", "Base Model", "File Name", "Download URL", "Model Image", "Model Version URL"]
+    fieldnames = ["Author", "Item Name", "Model Version Name", "Item Type", "Base Model", "File Name", "Download URL", "Model Image", "Model Version URL"]
 
     with open(filename, mode="w", newline="") as file:
         writer = csv.DictWriter(file, fieldnames=fieldnames)
@@ -119,3 +131,9 @@ output_filename = f"{username}_output.csv"
 write_to_csv(download_urls, output_filename)
 
 print(f"Data written to {output_filename} successfully.")
+
+# Display the type_base_statistics
+print("Model Statistics:")
+for item, count in type_base_statistics.items():
+    print(f"{item}: {count}")
+
