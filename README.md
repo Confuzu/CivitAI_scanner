@@ -11,7 +11,7 @@ Set your CivitAI API token as an environment variable (recommended):
 export CIVITAI_API_TOKEN=your_token_here
 ```
 
-If the variable is not set, you will be prompted to enter it at startup (input is hidden). The token is sent via `Authorization: Bearer` header — never appended to URLs.
+If the variable is not set, you will be prompted to enter it at startup (input is hidden). The token is sent via `Authorization: Bearer` header — never appended to URLs. </ b>
 
 Example
 This is the first line of the CSV with the user psoft of what you will find in username_output.csv.
