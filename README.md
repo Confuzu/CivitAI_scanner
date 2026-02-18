@@ -1,8 +1,19 @@
 # CivitAI scanner
 
-It asks the Civit AI for all content of the given Username and creates a nice CSV with all the Infos 
+It asks the Civit API for all content of the given Username and creates a nice CSV with all the Infos 
 the API is providing. 
 
+## Authentication
+
+Set your CivitAI API token as an environment variable (recommended):
+
+```bash
+export CIVITAI_API_TOKEN=your_token_here
+```
+
+If the variable is not set, you will be prompted to enter it at startup (input is hidden). The token is sent via `Authorization: Bearer` header — never appended to URLs.
+
+Example
 This is the first line of the CSV with the user psoft of what you will find in username_output.csv.
 
 Item Name
